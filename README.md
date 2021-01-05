@@ -48,16 +48,6 @@ handyScroll.mount([myDOMElement1, myDOMElement2, myDOMElement3]);
 handyScroll.mount(".examples > .spacious-container");
 ```
 
-### Auto-initialisation
-
-There is another way to mount the handy-scroll widget without writing a single line of JavaScript code. Just add the attribute `data-handy-scroll` to the desired containers. As the DOM is ready the module will detect all such elements and will mount widgets automatically.
-
-```html
-<div class="spacious-container" data-handy-scroll>
-    <!-- Horizontally wide contents -->
-</div>
-```
-
 ### Checking widget existence
 
 You may check if the widget is already mounted in the given container by calling the `handyScroll.mounted()` method.
