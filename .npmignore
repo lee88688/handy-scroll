@@ -2,3 +2,4 @@
 .babelrc
 .eslint*
 rollup.config.js
+example
