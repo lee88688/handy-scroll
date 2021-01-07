@@ -14,7 +14,7 @@ const handyScroll = {
     if (!container || handyScroll.mounted(container)) {
       return;
     }
-    const instance = new HandyScrollProto(container, dom.$(scrollBody) ?? dom.body);
+    const instance = new HandyScrollProto(container, dom.$(scrollBody) ?? undefined);
     instances.push(instance);
     // instance.init(container);
   },

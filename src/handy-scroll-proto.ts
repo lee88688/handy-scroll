@@ -3,13 +3,13 @@ import dom from './dom';
 class HandyScrollProto {
   container: HTMLElement
   widget!: HTMLDivElement
-  scrollBody: HTMLElement
+  scrollBody?: HTMLElement
   eventHandlers: { el: HTMLElement, handlers: { [key: string]: () => void } }[] = []
   visible: boolean
   skipSyncWidget: boolean
   skipSyncContainer: boolean
 
-  constructor(container: HTMLElement, scrollBody: HTMLElement) {
+  constructor(container: HTMLElement, scrollBody?: HTMLElement) {
     // const instance = this;
     // let scrollBodies = dom.$$('.handy-scroll-body')
     //   .filter(node => node.contains(container));
@@ -42,7 +42,7 @@ class HandyScrollProto {
     const instance = this;
     const eventHandlers = instance.eventHandlers = [
       {
-        el: instance.scrollBody || window,
+        el: instance.scrollBody ?? (window as any),
         handlers: {
           scroll() {
             instance.checkVisibility();
@@ -97,6 +97,7 @@ class HandyScrollProto {
         scrollBody.getBoundingClientRect().bottom :
         window.innerHeight || dom.html.clientHeight;
       mustHide = ((containerRect.bottom <= maxVisibleY) || (containerRect.top > maxVisibleY));
+      // console.log(`mustHide: ${mustHide}, bottom: ${containerRect.bottom}, maxVisibleY: ${maxVisibleY}, top: ${containerRect.top}`);
     }
     if (this.visible === mustHide) {
       this.visible = !mustHide;
@@ -133,8 +134,13 @@ class HandyScrollProto {
     const {widget, container, scrollBody} = this;
     const {clientWidth, scrollWidth} = container;
     widget.style.width = `${clientWidth}px`;
-    if (!scrollBody) {
-      widget.style.left = `${container.getBoundingClientRect().left}px`;
+    // for fixed position left, right is auto by default
+    // if (!scrollBody) {
+    //   widget.style.left = `${container.getBoundingClientRect().left}px`;
+    // }
+    if (scrollBody) {
+      const bottom = window.innerHeight - scrollBody.getBoundingClientRect().bottom;
+      widget.style.bottom = `${bottom}px`;
     }
     if (widget.firstElementChild) {
       (widget.firstElementChild as HTMLElement).style.width = `${scrollWidth}px`;
