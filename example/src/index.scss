@@ -1,0 +1,18 @@
+@mixin ie-special {
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+.el-table__body-wrapper > .handy-scroll {
+  z-index: 100;
+}
+
+@include ie-special {
+  .el-card {
+    border-radius: 0 !important;
+    -ms-border-radius: 0 0 0 0 !important;
+    overflow: auto;
+    transition: none;
+  }
+}
