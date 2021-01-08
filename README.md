@@ -1,6 +1,9 @@
 # handy-scroll
 
-Handy dependency-free floating scrollbar widget
+Handy dependency-free floating scrollbar widget. This is a fork of [handy-scroll](https://github.com/Amphiluke/handy-scroll) with several changes:
+- refactor with Typescript
+- custom scroll body at start
+- support the scroll body's bottom is not the bottom of viewport
 
 ## Synopsis
 
@@ -27,7 +30,7 @@ npm install handy-scroll
 
 The module exports a single object `handyScroll` which provides the following methods:
 
-* [`mount`](#mounting-the-widget) — initializes and “mounts” the widgets in the specified containers;
+* [`mount`](#mounting-the-widget) — initializes, “mounts” the widgets in the specified containers and initializes scroll body;
 * [`mounted`](#checking-widget-existence) — checks if the widget is already mounted in the given container;
 * [`update`](#updating-scrollbar) — updates the widget parameters and position;
 * [`destroy`](#destroying-the-widget) — destroys the widgets mounted in the specified containers and removes all related event handlers.
@@ -38,13 +41,12 @@ The only thing required to attach the widget to a static container (whose sizes 
 
 ```javascript
 // mount widget in the specified container element
-handyScroll.mount(document.getElementById("spacious-container"));
+handyScroll.mount(document.getElementById("spacious-container"), '.scroll-body');
 
 // mount widgets in all the container elements in the collection
-handyScroll.mount(document.getElementsByClassName("spacious-container"));
-handyScroll.mount([myDOMElement1, myDOMElement2, myDOMElement3]);
+handyScroll.mount(document.getElementsByClassName("spacious-container"), document.getElementById('scroll-body'));
 
-// mount widgets in all the container elements matching the selector
+// mount only one widget. if scroll body is not provide, default is html document element.
 handyScroll.mount(".examples > .spacious-container");
 ```
 

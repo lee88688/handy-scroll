@@ -1,9 +1,9 @@
 {
-  "name": "handy-scroll",
-  "version": "1.0.5",
+  "name": "@lee88688/handy-scroll",
+  "version": "2.0.0",
   "description": "Handy dependency-free floating scrollbar widget",
   "main": "dist/handy-scroll.min.js",
-  "module": "dist/handy-scroll.es6.js",
+  "module": "dist/handy-scroll.js",
   "style": "dist/handy-scroll.css",
   "scripts": {
     "lint": "eslint src/*.ts",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Amphiluke/handy-scroll.git"
+    "url": "git+https://github.com/lee88688/handy-scroll.git"
   },
   "keywords": [
     "scrollbar",
@@ -22,9 +22,9 @@
   "author": "Amphiluke, Jimmie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Amphiluke/handy-scroll/issues"
+    "url": "https://github.com/lee88688/handy-scroll/issues"
   },
-  "homepage": "https://amphiluke.github.io/handy-scroll/",
+  "homepage": "https://github.com/lee88688/handy-scroll",
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
