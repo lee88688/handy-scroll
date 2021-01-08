@@ -3,3 +3,4 @@
 .eslint*
 rollup.config.js
 example
+.github
