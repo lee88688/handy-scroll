@@ -4,7 +4,8 @@
     <div class="page">
       <div class="header">header</div>
       <div class="content" id="content">
-        <el-card>
+        <el-switch v-model="show" style="display: block; margin-bottom: 20px;" />
+        <el-card v-if="show">
           <el-table v-el-table-hs:content :data="tableData">
             <el-table-column type="selection"/>
             <el-table-column type="index" label="#" fixed="left"/>
@@ -65,7 +66,10 @@ export default {
         title: '@title'
       }]
     })
-    return tableData
+    return {
+      ...tableData,
+      show: true
+    }
   }
 }
 </script>
@@ -119,7 +123,7 @@ export default {
     .footer {
       flex-shrink: 0;
       flex-grow: 0;
-      height: 50px;
+      height: 10vh;
       background: greenyellow;
       text-align: center;
     }

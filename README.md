@@ -12,18 +12,17 @@ handy-scroll is a dependency-free module which can be used to solve the problem 
 :bulb: **Tips:**
 
 * If you are rather looking for a jQuery plugin with the same functionality, please check out the sibling project [floating-scroll](https://github.com/Amphiluke/floating-scroll) instead.
-* Developing a Vue-based app? Consider using the [vue-handy-scroll](https://github.com/Amphiluke/vue-handy-scroll) component.
 
 ## Usage
 
-The widget requires the CSS file [handy-scroll.css](dist/handy-scroll.css) to be included on the page (you may also import it in your CSS/LESS files). The module script file [handy-scroll.min.js](dist/handy-scroll.min.js) may be added on the web page either via a separate `<script>` element, or it may be loaded by any AMD/CommonJS compatible module loader.
+The widget requires the CSS file `handy-scroll.css` to be included on the page (you may also import it in your CSS/LESS files). The module script file `handy-scroll.umd.min.js` may be added on the web page either via a separate `<script>` element. if you use any AMD/CommonJS compatible module loader, use `handy-scroll.umd.min.js`.
 
-:bulb: **Tip:** If you don’t care about supporting Internet Explorer, feel free to use the file [handy-scroll.es6.min.js](dist/handy-scroll.es6.min.js), which is de facto the same as handy-scroll.min.js but is written in ES6, and is a bit smaller.
+:bulb: **Tip:** If you don’t care about supporting Internet Explorer, feel free to use the file `handy-scroll.es.min.js`, which is de facto the same as handy-scroll.min.js but is written in ES6, and is a bit smaller.
 
 The handy-scroll package is available on npm, so you may add it to your project as usual:
 
 ```
-npm install handy-scroll
+npm install @monsterlee/handy-scroll
 ```
 
 ## Details & API
@@ -34,10 +33,12 @@ The module exports a single object `handyScroll` which provides the following me
 * [`mounted`](#checking-widget-existence) — checks if the widget is already mounted in the given container;
 * [`update`](#updating-scrollbar) — updates the widget parameters and position;
 * [`destroy`](#destroying-the-widget) — destroys the widgets mounted in the specified containers and removes all related event handlers.
+* [`hooks`](#hooks) - hooks
 
 ### Mounting the widget
 
-The only thing required to attach the widget to a static container (whose sizes will never change during the session) is a single call of the `handyScroll.mount()` method. The method expects a single argument, the target containers reference, which can be either an element, or a list of elements, or a selector.
+The only thing required to attach the widget to a static container (whose sizes will never change during the session) is a single call of the `handyScroll.mount()` method. The method expects two argument, the target containers reference which can be either an element or a selector, and the scroll body element which provides html element by default.
+The method returns the instance of HandyScrollProto. The instance can be used for adding hooks and more accurate controls. 
 
 ```javascript
 // mount widget in the specified container element
@@ -81,6 +82,19 @@ handyScroll.destroy(".spacious-container");
 
 The method expects a single argument, the target containers reference, which can be either an element, or a list of elements, or a selector.
 
+### hooks
+
+```javascript
+const instance = handyScroll.mount(".examples > .spacious-container");
+instance.hooks.afterDestroy = () => {
+  // ...
+}
+```
+
+current hooks list below
+- beforeDestroy, with instance as argument
+- afterDestroy
+
 ### Special cases
 
 If you want to attach the widget to a container living in a positioned box (e.g. a modal popup with `position: fixed`) then you need to apply two special indicating class names in the markup. The module detects these indicating class names (they are prefixed with `handy-scroll-`) and switches to a special functioning mode.
@@ -107,10 +121,6 @@ The [handy-scroll.css](dist/handy-scroll.css) file provides some basic styles fo
 
 You can make the widget more “unobtrusive” so that it will appear only when the mouse pointer hovers over the scrollable container. To do so just apply the class `handy-scroll-hoverable` to the desired scrollable container owning the widget.
 
-## Integration with Angular
-
-If you have problems with the widget integration into your Angular app, please consult [this instruction](doc/angular-integration.md) first.
-
 ## Live demos
 
-Check out some usage demos [here](https://amphiluke.github.io/handy-scroll/).
+Check out some usage demos [here](https://lee88688.github.io/handy-scroll/). The demo source code is in example folder.

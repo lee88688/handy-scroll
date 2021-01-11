@@ -9,7 +9,7 @@ const handyScroll = {
    * @param {HTMLElement|String} containerRef - Widget container reference (either an element, or a selector)
    * @param scrollBody - container's scroll body
    */
-  mount(containerRef: string | HTMLElement, scrollBody: string | HTMLElement): void {
+  mount(containerRef: string | HTMLElement, scrollBody: string | HTMLElement) {
     const container = dom.$(containerRef);
     if (!container || handyScroll.mounted(container)) {
       return;
@@ -17,6 +17,7 @@ const handyScroll = {
     const instance = new HandyScrollProto(container, dom.$(scrollBody) ?? undefined);
     instances.push(instance);
     // instance.init(container);
+    return instance;
   },
 
   /**

@@ -8,7 +8,15 @@ const elTableHandyScroll = {
     console.log(arg)
     const container = el.querySelector('div.el-table__body-wrapper')
     setTimeout(() => {
-      handyScroll.mount(container, `#${arg}`)
+      const instance = handyScroll.mount(container, `#${arg}`)
+      const resizeFn = () => {
+        console.log('resize')
+        instance.update()
+      }
+      window.addEventListener('resize', resizeFn)
+      instance.hooks.afterDestroy = () => {
+        window.removeEventListener('resize', resizeFn)
+      }
     }, 0)
   },
   unbind (el, binding) {

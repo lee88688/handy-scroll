@@ -1,6 +1,6 @@
 {
   "name": "@monsterlee/handy-scroll",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Handy dependency-free floating scrollbar widget",
   "main": "dist/handy-scroll.min.js",
   "module": "dist/handy-scroll.js",

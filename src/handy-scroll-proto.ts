@@ -1,5 +1,10 @@
 import dom from './dom';
 
+interface HandyScrollProtoHooks {
+  beforeDestroy?: (instance: HandyScrollProto) => void;
+  afterDestroy?: () => void;
+}
+
 class HandyScrollProto {
   container: HTMLElement
   widget!: HTMLDivElement
@@ -8,6 +13,7 @@ class HandyScrollProto {
   visible: boolean
   skipSyncWidget: boolean
   skipSyncContainer: boolean
+  hooks: HandyScrollProtoHooks
 
   constructor(container: HTMLElement, scrollBody?: HTMLElement) {
     // const instance = this;
@@ -24,6 +30,7 @@ class HandyScrollProto {
     this.addEventHandlers();
     // Set skipSync flags to their initial values (because update() above calls syncWidget())
     this.skipSyncContainer = this.skipSyncWidget = false;
+    this.hooks = {};
   }
 
   initWidget(): void {
@@ -155,6 +162,10 @@ class HandyScrollProto {
 
   // Remove a scrollbar and all related event handlers
   destroy(): void {
+    if (this.hooks.beforeDestroy) {
+      this.hooks.beforeDestroy(this);
+    }
+
     this.eventHandlers.forEach(({el, handlers}) => {
       Object.keys(handlers).forEach(event => el.removeEventListener(event, handlers[event], false));
     });
@@ -162,6 +173,10 @@ class HandyScrollProto {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const instance: any = this;
     instance.eventHandlers = instance.widget = instance.container = instance.scrollBody = null;
+
+    if (this.hooks.afterDestroy) {
+      this.hooks.afterDestroy();
+    }
   }
 }
 
